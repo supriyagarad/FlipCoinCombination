@@ -1,12 +1,31 @@
-#!/bin/bash 
+#!/bin/bash  
 
 echo "Welcome to Flip Coin Simulation"
 
-coinToss=$((RANDOM%2))
+#variable
+Head=0
+Tail=0
+count=0
 
-if [ $coinToss -eq 0 ]
+read -p "enter number of time coin flip:" flipCoin
+
+while [[ $count -lt $flipCoin ]] 
+do 
+	coinToss=$((RANDOM%2))
+	if [ $coinToss -eq 0 ]
+	then
+		(( Head++ ))
+	else
+		(( Tail++ ))
+	fi
+	(( count++ ))
+done
+
+if [ $Head -gt $Tail ]
 then
-	echo "Head"
+	echo "head win $Head"
 else
-	echo "Tail"
+	echo "tail win $Tail"
 fi
+
+
