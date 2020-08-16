@@ -1,31 +1,39 @@
-#!/bin/bash  
+#!/bin/bash -x  
 
 echo "Welcome to Flip Coin Simulation"
 
 #variable
-Head=0
-Tail=0
-count=0
+head=0
+tail=0
 
-read -p "enter number of time coin flip:" flipCoin
+#constant
+MAX_COUNT=21
 
-while [[ $count -lt $flipCoin ]] 
+while [ $head -lt $MAX_COUNT ] && [ $tail -lt $MAX_COUNT ]
 do 
 	coinToss=$((RANDOM%2))
-	if [ $coinToss -eq 0 ]
+	if [ $coinToss -eq 1 ]
 	then
-		(( Head++ ))
+		(( head++ ))
 	else
-		(( Tail++ ))
+		(( tail++ ))
 	fi
-	(( count++ ))
 done
 
-if [ $Head -gt $Tail ]
+echo $head
+echo $tail
+
+if [ $head -gt $tail ]
 then
-	echo "head win $Head"
+		win=$(( $head - $tail ))
+		echo "head win by $win"
+
+elif [ $tail -gt $head ]
+then
+		win=$(( $tail - $head ))
+		echo "tail win by $win"
 else
-	echo "tail win $Tail"
+		echo "match Tie"
 fi
 
 
