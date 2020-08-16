@@ -1,4 +1,4 @@
-#!/bin/bash -x  
+#!/bin/bash  
 
 echo "Welcome to Flip Coin Simulation"
 
@@ -20,20 +20,38 @@ do
 	fi
 done
 
-echo $head
-echo $tail
+if [ $head -eq $tail ]
+then
+	while true
+	do
+		coin=$((RANDOM%2))
+		if [ $coin -eq 1 ]
+		then
+			(( head++ ))
+		else
+			(( tail++ ))
+		fi
 
-if [ $head -gt $tail ]
+		if [ $(($head - $tail )) -eq 2 ]
+		then
+			echo "head win by 2 and count is $head"
+
+		else
+				if [ $(($tail - $head )) -eq 2 ]
+				then
+					echo "Tail win by 2 and count is $tail"
+				fi
+		fi
+	done
+
+elif [ $head -gt $tail ]
 then
 		win=$(( $head - $tail ))
 		echo "head win by $win"
 
-elif [ $tail -gt $head ]
-then
+else
 		win=$(( $tail - $head ))
 		echo "tail win by $win"
-else
-		echo "match Tie"
 fi
 
 
